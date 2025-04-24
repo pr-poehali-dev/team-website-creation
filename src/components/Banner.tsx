@@ -1,4 +1,6 @@
+
 import { Button } from "@/components/ui/button";
+import { FC } from "react";
 
 interface BannerProps {
   title: string;
@@ -7,33 +9,27 @@ interface BannerProps {
   imageUrl: string;
 }
 
-const Banner = ({ title, subtitle, buttonText, imageUrl }: BannerProps) => {
+const Banner: FC<BannerProps> = ({ title, subtitle, buttonText, imageUrl }) => {
   return (
-    <div className="bg-background py-20">
-      <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
-        <div className="flex-1 text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight animate-fade-in">
-            {title}
-          </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-md">
-            {subtitle}
-          </p>
-          <Button size="lg" className="hover-scale">
-            {buttonText}
-          </Button>
-        </div>
-        <div className="flex-1">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/40 rounded-lg blur"></div>
+    <section className="py-16 bg-gradient-to-r from-background to-accent/10">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6 animate-fade-in">
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight">{title}</h1>
+            <p className="text-xl text-muted-foreground">{subtitle}</p>
+            <Button size="lg" className="hover-scale">{buttonText}</Button>
+          </div>
+          <div className="flex justify-center md:justify-end">
             <img 
               src={imageUrl} 
               alt="Профессиональная команда" 
-              className="relative rounded-lg w-full h-auto shadow-lg"
+              className="rounded-lg shadow-lg max-w-full h-auto hover-scale"
+              style={{ maxHeight: "400px" }}
             />
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,5 +1,6 @@
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { FC } from "react";
 
 interface TeamMemberCardProps {
   name: string;
@@ -7,19 +8,22 @@ interface TeamMemberCardProps {
   imageUrl: string;
 }
 
-const TeamMemberCard = ({ name, position, imageUrl }: TeamMemberCardProps) => {
+const TeamMemberCard: FC<TeamMemberCardProps> = ({ name, position, imageUrl }) => {
   return (
-    <Card className="text-center hover-scale transition-all duration-300 hover:shadow-lg">
-      <CardHeader className="pt-6 pb-2">
-        <Avatar className="h-24 w-24 mx-auto mb-4">
-          <AvatarImage src={imageUrl} alt={name} />
-          <AvatarFallback>{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-        </Avatar>
+    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary">
+      <div className="relative h-64 overflow-hidden">
+        <img 
+          src={imageUrl} 
+          alt={name} 
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+        />
+      </div>
+      <CardHeader className="text-center">
         <h3 className="text-xl font-bold">{name}</h3>
+        <CardContent className="pt-1 p-0 text-muted-foreground">
+          {position}
+        </CardContent>
       </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground">{position}</p>
-      </CardContent>
     </Card>
   );
 };
